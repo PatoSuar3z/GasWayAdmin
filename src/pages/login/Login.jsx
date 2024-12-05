@@ -18,14 +18,20 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
+    // Verificar si el correo ingresado es el permitido
+    if (email !== "soporte.gasway@outlook.com") {
+      setError(true);
+      return; // Evitar continuar si el correo no es el correcto
+    }
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         dispatch({ type: "LOGIN", payload: user });
-        navigate("/");
+        navigate("/"); // Redirige a la página principal
       })
       .catch(() => {
-        setError(true);
+        setError(true); // Mostrar error si las credenciales no son correctas
       });
   };
 
