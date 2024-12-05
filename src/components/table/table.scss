@@ -1,0 +1,52 @@
+.table {
+  font-size: 12px;
+  border-radius: 8px; /* Bordes redondeados para la tabla */
+  overflow: hidden; /* Asegura que los bordes redondeados no se vean mal */
+  
+  .MuiTableCell-root {
+    padding: 12px 16px; /* Mayor padding para mayor espacio */
+    font-size: 14px; /* Mejor legibilidad */
+    word-wrap: break-word;
+    background-color: #fafafa; /* Fondo suave para celdas */
+  }
+
+  .MuiTableRow-root:nth-child(even) {
+    background-color: #f5f5f5; /* Alterna el color de las filas para mejor legibilidad */
+  }
+
+  .MuiTableRow-root:nth-child(odd) {
+    background-color: #ffffff;
+  }
+
+  .MuiTableHead-root {
+    background-color: #1976d2; /* Fondo de encabezado azul */
+    color: white; /* Texto blanco */
+    .MuiTableCell-root {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+
+  .MuiTableContainer-root {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+
+  .MuiTablePagination-root {
+    background-color: #e9f1f9; /* Fondo suave para la paginación */
+    border-top: 1px solid #ddd; /* Separador superior */
+  }
+
+  /* Estilo de celdas de estado */
+  .status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    &.Approved {
+      background-color: #4caf50;
+      color: white;
+    }
+    &.Pending {
+      background-color: #ff9800;
+      color: white;
+    }
+  }
+}

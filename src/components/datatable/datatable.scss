@@ -1,0 +1,114 @@
+.datatable {
+  height: 600px;
+  padding: 20px;
+  background-color: #f9f9f9; /* Fondo más suave */
+  border-radius: 8px; /* Bordes redondeados para la tabla */
+
+  .MuiPaginationItem-root {
+    border: none !important;  // Elimina el borde verde
+  }
+
+  .datatableTitle {
+    width: 100%;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px; /* Más espacio abajo */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+
+    .link {
+      text-decoration: none;
+      color: #28a745; /* Verde más suave */
+      font-size: 16px;
+      font-weight: 400;
+      border: 1px solid #28a745;
+      padding: 8px 15px;
+      border-radius: 30px; /* Bordes más redondeados */
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #28a745;
+        color: white;
+      }
+    }
+  }
+
+  .cellWithImg {
+    display: flex;
+    align-items: center;
+
+    .cellImg {
+      width: 40px; /* Tamaño más grande para mejor visibilidad */
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+  }
+
+  .cellWithStatus {
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-weight: 500; /* Texto más destacado */
+
+    &.active {
+      background-color: rgba(0, 128, 0, 0.1); /* Fondo suave para activo */
+      color: green;
+    }
+    &.pending {
+      background-color: rgba(255, 217, 0, 0.1); /* Fondo suave para pendiente */
+      color: goldenrod;
+    }
+    &.passive {
+      background-color: rgba(255, 0, 0, 0.1); /* Fondo suave para pasivo */
+      color: crimson;
+    }
+  }
+
+  .cellAction {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .viewButton {
+      padding: 6px 12px;
+      border-radius: 30px;
+      color: #007bff;
+      border: 1px solid #007bff;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background-color: #f0f8ff; /* Fondo suave */
+      
+      &:hover {
+        background-color: #007bff;
+        color: white;
+      }
+    }
+
+    .deleteButton {
+      padding: 6px 12px;
+      border-radius: 30px;
+      color: crimson;
+      border: 1px solid crimson;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background-color: #ffe6e6; /* Fondo suave */
+      
+      &:hover {
+        background-color: crimson;
+        color: white;
+      }
+    }
+  }
+
+  .datagrid {
+    border-radius: 8px; /* Bordes redondeados para la tabla */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para un efecto flotante */
+    border: 1px solid #ddd; /* Bordes sutiles */
+  }
+}
