@@ -56,11 +56,11 @@ const Products = () => {
     // Asignamos colores según la marca
     switch (marca) {
       case "Gasco":
-        backgroundColor = "rgba(0, 255, 255, 0.4)"; // Celeste transparente
+        backgroundColor = "rgba(0, 255, 255, 0.6)"; // Celeste transparente
         borderColor = "rgba(0, 255, 255, 1)"; // Celeste sólido
         break;
       case "Lipigas":
-        backgroundColor = "rgba(255, 255, 0, 0.4)"; // Amarillo transparente
+        backgroundColor = "rgba(255, 255, 0, 0.6)"; // Amarillo transparente
         borderColor = "rgba(255, 255, 0, 1)"; // Amarillo sólido
         break;
       case "Abastible":
@@ -120,51 +120,81 @@ const Products = () => {
           borderWidth: 1,
         },
       ],
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            ticks: {
-              stepSize: 1, // Esto asegura que los números en el eje Y sean enteros
-              beginAtZero: true, // Comienza desde cero
-              precision: 0, // Asegura que los valores sean números enteros
-            },
-          },
+      responsive: true,
+  plugins: {
+    legend: {
+      display: true,
+      position: "top",
+      labels: {
+        color: "#333", // Color de las etiquetas
+        font: {
+          size: 14,
+          weight: "bold",
         },
       },
-    };
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        color: "rgba(0,0,0,0.1)", // Líneas de la cuadrícula
+      },
+      ticks: {
+        color: "#333", // Color de las etiquetas del eje X
+        font: {
+          size: 12,
+          weight: "500",
+        },
+      },
+    },
+    y: {
+      grid: {
+        color: "rgba(0,0,0,0.1)", // Líneas de la cuadrícula
+      },
+      ticks: {
+        color: "#333", // Color de las etiquetas del eje Y
+        font: {
+          size: 12,
+          weight: "500",
+        },
+        precision: 0, // Asegurarse de usar números enteros
+      },
+    },
+  },
+};
   };
 
+
   return (
-    <div className="products">
+        <div className="products">
       <Sidebar />
       <div className="productsContainer">
         <Navbar />
         <div className="listContainer">
-          <div className="listTitle">Ventas por Marca</div>
+          <div className="listTitle">Venta de Productos</div>
           <div className="chartsContainer">
-            <div className="chartsRow">
-              {/* Gráfico general y Gasco en la primera columna */}
-              <div className="chart">
-                <h2>Gráfico General</h2>
-                <Bar data={generarDatosGraficoGeneral()} />
-              </div>
-              <div className="chart">
-                <h2>Gasco</h2>
-                <Bar data={generarDatosGrafico("Gasco", ventasPorMarca["Gasco"])} />
-              </div>
+            {/* Gráfico General */}
+            <div className="chart">
+              <h2>Gráfico General</h2>
+              <Bar data={generarDatosGraficoGeneral()} />
             </div>
-
-            <div className="chartsRow">
-              {/* Abastible y Lipigas en la segunda columna */}
-              <div className="chart">
-                <h2>Abastible</h2>
-                <Bar data={generarDatosGrafico("Abastible", ventasPorMarca["Abastible"])} />
-              </div>
-              <div className="chart">
-                <h2>Lipigas</h2>
-                <Bar data={generarDatosGrafico("Lipigas", ventasPorMarca["Lipigas"])} />
-              </div>
+            
+            {/* Gasco */}
+            <div className="chart">
+              <h2>Gasco</h2>
+              <Bar data={generarDatosGrafico("Gasco", ventasPorMarca["Gasco"])} />
+            </div>
+            
+            {/* Abastible */}
+            <div className="chart">
+              <h2>Abastible</h2>
+              <Bar data={generarDatosGrafico("Abastible", ventasPorMarca["Abastible"])} />
+            </div>
+            
+            {/* Lipigas */}
+            <div className="chart">
+              <h2>Lipigas</h2>
+              <Bar data={generarDatosGrafico("Lipigas", ventasPorMarca["Lipigas"])} />
             </div>
           </div>
         </div>

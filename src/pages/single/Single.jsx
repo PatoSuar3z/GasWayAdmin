@@ -261,28 +261,43 @@ const handlePrevPage = () => {
         </div>
         
         <div className="bottom">
-        <h1 className="title">Pedidos del Usuario</h1>
+          <h1 className="title">Pedidos del Usuario</h1>
           {userOrders.length > 0 ? (
-            <table className="productTable">
-              <thead>
-                <tr>
-                  <th>ID Pedido</th>
-                  <th>Fecha</th>
-                  <th>Estado</th>
-                  <th>Precio</th>
-                </tr>
-              </thead>
-              <tbody>
-                {userOrders.map((order) => (
-                   <tr key={order.id}>
-                   <td>{order.id}</td>
-                   <td>{order.fecha}</td> {/* Mostrar fecha legible */}
-                   <td>{order.estado}</td>
-                   <td>{order.precio}</td>
-                 </tr>
-                ))}
-              </tbody>
-            </table>
+            <>
+              <table className="productTable">
+                <thead>
+                  <tr>
+                    <th>ID Pedido</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ordersToShow.map((order) => (
+                    <tr key={order.id}>
+                      <td>{order.id}</td>
+                      <td>{order.fecha}</td> {/* Mostrar fecha legible */}
+                      <td>{order.estado}</td>
+                      <td>{order.precio}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {/* Controles de paginación */}
+              <div className="pagination">
+                <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                  Anterior
+                </button>
+                <span>Página {currentPage}</span>
+                <button
+                  onClick={handleNextPage}
+                  disabled={currentPage * rowsPerPage >= userOrders.length}
+                >
+                  Siguiente
+                </button>
+              </div>
+            </>
           ) : (
             <p>No hay pedidos para este usuario.</p>
           )}

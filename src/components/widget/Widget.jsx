@@ -116,7 +116,7 @@ const Widget = ({ type }) => {
         } else if (data.query === "pedidos") {
           const pedidosCollection = collection(db, data.query);
           const pedidosSnapshot = await getDocs(
-            query(pedidosCollection, where("estado", "==", "finalizado"))
+            query(pedidosCollection, where("estado", "==", "Llegado"))
           );
           const totalPedidos = pedidosSnapshot.docs.length;
   
@@ -140,7 +140,7 @@ const Widget = ({ type }) => {
         } else if (type === "earning") {
           const pedidosCollection = collection(db, "pedidos");
           const pedidosSnapshot = await getDocs(
-            query(pedidosCollection, where("estado", "==", "finalizado"))
+            query(pedidosCollection, where("estado", "==", "Llegado"))
           );
   
           let totalGanancias = 0;

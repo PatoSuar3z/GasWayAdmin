@@ -8,16 +8,23 @@ import { useState, useEffect } from "react";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase";
 
+const getChileDate = () => {
+  const chileOffset = -3; // Chile tiene UTC-3 (a menos que sea horario de verano)
+  const localDate = new Date();
+  localDate.setHours(localDate.getHours() + chileOffset - localDate.getTimezoneOffset() / 60);
+  return localDate;
+};
+
 const Featured = () => {
   const [totalPedidos, setTotalPedidos] = useState(0);
   const [pedidosSemanaPasada, setPedidosSemanaPasada] = useState(0);
   const [pedidosMesAnterior, setPedidosMesAnterior] = useState(0);
 
   useEffect(() => {
-    // Fecha de hoy a las 00:00
-    const today = new Date();
+    // Fecha de hoy a las 00:00 en la hora de Chile
+    const today = getChileDate();
     today.setHours(0, 0, 0, 0);
-    console.log(today);
+    console.log("Fecha de hoy (Chile): ", today);
 
     // Fecha de inicio de la semana pasada
     const lastWeek = new Date(today);
@@ -30,7 +37,7 @@ const Featured = () => {
     // Query para pedidos de hoy con estado "finalizado"
     const qToday = query(
       collection(db, "pedidos"),
-      where("estado", "==", "finalizado"), // Filtro para estado "finalizado"
+      where("estado", "==", "Llegado"), // Filtro para estado "finalizado"
       where("timestamp", ">=", today)
     );
     const unsubscribeToday = onSnapshot(qToday, (snapshot) => {
@@ -40,7 +47,7 @@ const Featured = () => {
     // Query para pedidos de la semana pasada con estado "finalizado"
     const qLastWeek = query(
       collection(db, "pedidos"),
-      where("estado", "==", "finalizado"), // Filtro para estado "finalizado"
+      where("estado", "==", "Llegado"), // Filtro para estado "finalizado"
       where("timestamp", ">=", lastWeek),
       where("timestamp", "<", today)
     );
@@ -51,7 +58,7 @@ const Featured = () => {
     // Query para pedidos del mes pasado con estado "finalizado"
     const qLastMonth = query(
       collection(db, "pedidos"),
-      where("estado", "==", "finalizado"), // Filtro para estado "finalizado"
+      where("estado", "==", "Llegado"), // Filtro para estado "finalizado"
       where("timestamp", ">=", lastMonth),
       where("timestamp", "<", today)
     );
@@ -66,14 +73,13 @@ const Featured = () => {
     };
   }, []);
 
-  const target = 100; // Objetivo de pedidos diarios
-  const progress = (totalPedidos / target) * 100;
+  const target = 50; // Objetivo de pedidos diarios
+  const progress = (totalPedidos / target) * 50;
 
   return (
     <div className="featured">
       <div className="top">
         <h1 className="title">Total Pedidos</h1>
-        <MoreVertIcon fontSize="small" />
       </div>
       <div className="bottom">
         <div className="featuredChart">

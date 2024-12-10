@@ -25,11 +25,21 @@ const Home = () => {
   }, []);
 
   // Filtrar los pedidos por estado
-  const pedidosPendientes = pedidos.filter(pedido => pedido.estado === "pendiente");
-  const pedidosEnCamino = pedidos.filter(pedido => pedido.estado === "en camino");
-  const pedidosFinalizados = pedidos.filter(pedido => pedido.estado === "finalizado");
-  const pedidosCancelados = pedidos.filter(pedido => pedido.estado === "cancelado");
+  const pedidosPendientes = pedidos
+  .filter(pedido => pedido.estado === "Pendiente")
+  .sort((a, b) => b.timestamp - a.timestamp);
 
+const pedidosEnCamino = pedidos
+  .filter(pedido => pedido.estado === "Aceptado")
+  .sort((a, b) => b.timestamp - a.timestamp);
+
+const pedidosFinalizados = pedidos
+  .filter(pedido => pedido.estado === "Llegado")
+  .sort((a, b) => b.timestamp - a.timestamp);
+
+const pedidosCancelados = pedidos
+  .filter(pedido => pedido.estado === "Rechazado")
+  .sort((a, b) => b.timestamp - a.timestamp);
   // Función para actualizar el estado del pedido a "cancelado"
   const handleCancelOrder = async (pedidoId) => {
     const pedidoRef = doc(db, "pedidos", pedidoId);
