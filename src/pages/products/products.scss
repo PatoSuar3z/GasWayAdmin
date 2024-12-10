@@ -16,10 +16,12 @@
       }
   
       .listContainer {
-        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        margin-top: 20px;
         padding: 20px;
-        margin: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      }
   
         .listTitle {
           font-weight: 500;
@@ -28,5 +30,29 @@
         }
       }
     }
-  }
+
+    .chartsContainer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+    
+    .chartsRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+      width: 100%;
+    }
+    
+    .chart {
+      width: 50%; /* Ocupa el 48% de la fila para que quepan dos en cada fila */
+    }
+    
+    .chart h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
   

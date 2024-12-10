@@ -34,7 +34,7 @@ const Chart = ({ aspect, title }) => {
         const estado = data.estado;  // Asegúrate de que el campo "estado" existe en los datos
 
         // Solo sumar los precios de los productos cuyo estado es "finalizado"
-        if (estado === "finalizado") {
+        if (estado === "Llegado") {
           if (isNaN(precio)) {
             console.log("Invalid precio:", data.precio);  // Esto te ayudará a detectar valores incorrectos
             return;  // Si el precio no es válido, omite este documento
