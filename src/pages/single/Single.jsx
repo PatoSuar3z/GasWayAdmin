@@ -7,6 +7,9 @@ import { db } from "../../firebase";
 import { doc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { Snackbar, Alert } from "@mui/material"; // Importar Snackbar y Alert
 
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+
+
 const Single = () => {
   const { userId } = useParams();
   const [userData, setUserData] = useState(null);
@@ -78,6 +81,26 @@ const Single = () => {
 
     fetchUserData();
   }, [userId, db]);
+
+  const getOrderStatusData = () => {
+    const statusCount = { Aceptado: 0, Rechazado: 0, Llegado: 0 };
+  
+    userOrders.forEach((order) => {
+      if (order.estado === "Aceptado") {
+        statusCount.Aceptado++;
+      } else if (order.estado === "Rechazado") {
+        statusCount.Rechazado++;
+      } else if (order.estado === "Llegado") {
+        statusCount.Llegado++;
+      }
+    });
+  
+    return [
+      { name: "Aceptado", value: statusCount.Aceptado },
+      { name: "Rechazado", value: statusCount.Rechazado },
+      { name: "Llegado", value: statusCount.Llegado },
+    ];
+  };
 
   const handleEditClick = (product) => {
     setSelectedProduct(product);
@@ -226,7 +249,7 @@ const handlePrevPage = () => {
             {userData ? (
               <div className="item">
                 <img
-                  src={userData.profilePicture || "https://via.placeholder.com/150"}
+                  src={userData.profilePicture || userData.photoURL}
                   alt=""
                   className="itemImg"
                 />
@@ -252,6 +275,28 @@ const handlePrevPage = () => {
                     <span className="itemKey">Tipo Usuario:</span>
                     <span className="itemValue">{userData.tipoUsuario}</span>
                   </div>
+
+                  {/* Mostrar detalles adicionales si el usuario es proveedor */}
+                  {userData.tipoUsuario === "proveedor" && (
+                    <>
+                      <div className="detailItem">
+                        <span className="itemKey">Distribuidora:</span>
+                        <span className="itemValue">{userData.distribuidora}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className="itemKey">Dirección:</span>
+                        <span className="itemValue">{userData.direccion}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className="itemKey">Estado:</span>
+                        <span className="itemValue">{userData.estado}</span>
+                      </div>
+                      <div className="detailItem">
+                        <span className="itemKey">Patente:</span>
+                        <span className="itemValue">{userData.patente}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             ) : (
@@ -260,6 +305,32 @@ const handlePrevPage = () => {
           </div>
         </div>
         
+        <div className="bottom">
+        <h1 className="title">Estado de los Pedidos</h1>
+        {userOrders.length > 0 ? (
+          <ResponsiveContainer width="100%" height={200}>
+            <PieChart>
+              <Pie
+                data={getOrderStatusData()}
+                dataKey="value"
+                nameKey="name"
+                outerRadius={60}
+                label
+              >
+                <Cell fill="#0088FE" />  {/* Azul para Aceptado */}
+                <Cell fill="#FF8042" />  {/* Naranja para Rechazado */}
+                <Cell fill="#4CAF50" />  {/* Verde para Llegado */}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        ) : (
+          <p>No hay pedidos para este usuario.</p>
+        )}
+      </div>
+
+
         <div className="bottom">
           <h1 className="title">Pedidos del Usuario</h1>
           {userOrders.length > 0 ? (

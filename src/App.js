@@ -6,6 +6,7 @@ import New from "./pages/new/New";
 import Users from "./pages/users/Users"
 import Products from "./pages/products/Products";
 import Order from "./pages/orders/Order";
+import Paymnets from "./pages/payments/Payments";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
@@ -92,6 +93,7 @@ function App() {
             </Route>
             <Route path="maps" element={<Maps />} />
             <Route path="order" element={<Order />} />
+            <Route path="payments" element={<Paymnets />} />
           </Route>
           
         </Routes>

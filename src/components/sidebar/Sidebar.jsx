@@ -70,6 +70,13 @@ const Sidebar = () => {
             <span>Mapa</span>
           </li>
           </Link>
+          <Link to="/payments" style={{ textDecoration: "none" }}> 
+          <li>
+            <link to="/payments"/>
+            <CreditCardIcon className="icon" />
+            <span>Pagos</span>
+          </li>
+          </Link>
           <p className="title">USEFUL</p>
           <li>
             <NotificationsNoneIcon className="icon" />
